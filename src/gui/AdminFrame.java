@@ -61,7 +61,37 @@ public class AdminFrame extends JFrame {
         title.setFont(new Font("Arial", Font.BOLD, 22));
         title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setBorder(BorderFactory.createEmptyBorder(15, 10, 15, 10));
-        root.add(title, BorderLayout.NORTH);
+
+        // logout button
+        JButton btnLogout = new JButton("Logout");
+        btnLogout.setBackground(new Color(255, 153, 0));
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFocusPainted(false);
+        btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // returns to login screen
+        btnLogout.addActionListener(e -> {
+            dispose();
+            new LoginFrame();
+        });
+
+        // header panel to hold title + logout button
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(Color.WHITE);
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+
+        // center title
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        headerPanel.add(title, BorderLayout.CENTER);
+
+        // right side logout button
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        rightPanel.setBackground(Color.WHITE);
+        rightPanel.add(btnLogout);
+
+        headerPanel.add(rightPanel, BorderLayout.EAST);
+
+        root.add(headerPanel, BorderLayout.NORTH);
 
         // table setup to show all products
         model = new DefaultTableModel();

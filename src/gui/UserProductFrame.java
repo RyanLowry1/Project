@@ -70,9 +70,23 @@ public class UserProductFrame extends JFrame {
 
         // cart button with image
         JButton cartBtn = new JButton();
+
         cartBtn.setBorderPainted(false);
         cartBtn.setContentAreaFilled(false);
         cartBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        // logout button
+        JButton btnLogout = new JButton("Logout");
+        btnLogout.setBackground(new Color(255, 153, 0));
+        btnLogout.setForeground(Color.WHITE);
+        btnLogout.setFocusPainted(false);
+        btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // returns user to login screen
+        btnLogout.addActionListener(e -> {
+            dispose(); // close current window
+            new LoginFrame(); // open login screen
+        });
 
         // load and scale cart image
         ImageIcon cartIcon = new ImageIcon(getClass().getResource("/images/cart.jpg"));
@@ -83,7 +97,14 @@ public class UserProductFrame extends JFrame {
         cartBtn.addActionListener(e -> showCart());
 
         headerWrapper.add(header, BorderLayout.CENTER);
-        headerWrapper.add(cartBtn, BorderLayout.EAST);
+        // panel to hold cart and logout buttons
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+        rightPanel.setBackground(Color.WHITE);
+
+        rightPanel.add(btnLogout);
+        rightPanel.add(cartBtn);
+
+        headerWrapper.add(rightPanel, BorderLayout.EAST);
 
         root.add(headerWrapper, BorderLayout.NORTH);
 
