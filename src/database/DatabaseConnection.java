@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private static final String DATABASE_URL =
             "jdbc:mysql://localhost:3306/restaurant_schema?useSSL=false&serverTimezone=UTC";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "57Longwood%";
+    private static final String PASSWORD = "Ryan12345!";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(

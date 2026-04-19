@@ -270,7 +270,16 @@ public class UserProductFrame extends JFrame {
 
         // adds selected quantity to cart
         if (choice == 0) {
-            cart.put(product, cart.getOrDefault(product, 0) + qty[0]);
+            int currentQty = cart.getOrDefault(product, 0);
+            int newQty = currentQty + qty[0];
+
+            // check stock before adding
+            if (newQty > product.getStock()) {
+                JOptionPane.showMessageDialog(this, "Not enough stock available");
+                return;
+            }
+
+            cart.put(product, newQty);
             JOptionPane.showMessageDialog(this, qty[0] + " item(s) added!");
         }
     }
@@ -314,6 +323,13 @@ public class UserProductFrame extends JFrame {
 
                 // increase quantity
                 plus.addActionListener(e -> {
+
+                    // check stock before increasing
+                    if (cart.get(p) >= p.getStock()) {
+                        JOptionPane.showMessageDialog(this, "Max stock reached");
+                        return;
+                    }
+
                     cart.put(p, cart.get(p) + 1);
                     refresh[0].run();
                 });
